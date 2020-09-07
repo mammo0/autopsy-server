@@ -1,0 +1,2 @@
+# enable auto ingest mode
+COPY config/AutoIngest.properties $CONFIG_DIR/config/

@@ -1,0 +1,6 @@
+# the following files/folders are not necessary for the build process
+/env_files
+/include
+/.env
+/docker-compose.yml
+/Makefile

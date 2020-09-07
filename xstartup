@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# start the window manager
+matchbox-window-manager -use_titlebar no &
+
+# run autopsy
+exec /opt/autopsy/bin/autopsy --userdir $CONFIG_DIR
