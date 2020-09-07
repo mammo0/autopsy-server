@@ -46,7 +46,7 @@ services:
                     - activemq
         restart: unless-stopped
 
-    autopsy:
+    autopsy-server:
         build:
             context: .
             args:
@@ -61,7 +61,7 @@ services:
         networks:
             autopsy_net:
                 aliases:
-                    - autopsy
+                    - autopsy-server
         restart: always
 
 networks:
