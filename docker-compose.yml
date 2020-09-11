@@ -47,6 +47,10 @@ services:
         restart: unless-stopped
 
     autopsy-server:
+        depends_on:
+            - postgres
+            - solr
+            - activemq
         build:
             context: .
             args:
