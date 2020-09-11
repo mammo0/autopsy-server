@@ -37,7 +37,10 @@ RUN apt-get update && \
         procps \
         # this is needed to share autopsy via a vnc server
         tigervnc-standalone-server \
-        matchbox-window-manager && \
+        matchbox-window-manager \
+        tint2 \
+        xfe \
+        xpdf && \
     # fix for missing man directories in 'slim' image
     for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done
 
@@ -96,6 +99,14 @@ USER $AUTOPSY_USER
 
 # copy the vnc startup script to the container
 COPY xstartup $USER_DIR/.vnc/
+# copy predefined config for tint2
+COPY config/tint2rc $USER_DIR/.tint2rc
+
+# setup MIME types for default external viewers
+RUN xdg-mime default xfe.desktop inode/directory && \
+    xdg-mime default xfi.desktop image/* && \
+    xdg-mime default xfw.desktop text/* && \
+    xdg-mime default xpdf.desktop application/pdf
 
 EXPOSE 5901/tcp
 VOLUME ["$CONFIG_DIR", "$CASES_DIR", "$IMAGES_DIR"]

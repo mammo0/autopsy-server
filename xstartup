@@ -2,6 +2,7 @@
 
 # start the window manager
 matchbox-window-manager -use_titlebar no &
+tint2 -c $HOME/.tint2rc &
 
 # run autopsy
 exec /opt/autopsy/bin/autopsy --userdir $CONFIG_DIR
