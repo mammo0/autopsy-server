@@ -1,8 +1,8 @@
 FROM debian:sid-slim
 ARG DEBIAN_FRONTEND=noninteractive
 
-ARG AUTOPSY_VERSION=4.15.0
-ARG SLEUTHKIT_VERSION=4.9.0
+ARG AUTOPSY_VERSION=4.16.0
+ARG SLEUTHKIT_VERSION=4.10.0
 
 # the password for the vnc server (unset by default)
 # should be set at runtime
