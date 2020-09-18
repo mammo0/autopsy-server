@@ -1,0 +1,8 @@
+# install additional viewers for common file types
+USER root
+RUN apt-get install -y \
+        xpdf
+
+# setup MIME types for the external viewers
+USER $AUTOPSY_USER
+RUN xdg-mime default xpdf.desktop application/pdf

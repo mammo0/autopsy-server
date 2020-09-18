@@ -3,14 +3,16 @@ TAG=autopsy
 
 MAIN_TEMPLATE=include/main.docker
 SERVER_TEMPLATE=include/server.docker
+CLIENT_TEMPLATE=include/client.docker
 
 CURRENT_DIR := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 
 .DEFAULT_GOAL := standalone
 .PHONY: standalone server build compose clean
 
-standalone: $(MAIN_TEMPLATE)
+standalone: $(MAIN_TEMPLATE) $(CLIENT_TEMPLATE)
 	cat $(MAIN_TEMPLATE) > $(DOCKERFILE)
+	cat $(CLIENT_TEMPLATE) >> $(DOCKERFILE)
 
 server: $(MAIN_TEMPLATE) $(SERVER_TEMPLATE)
 	cat $(MAIN_TEMPLATE) > $(DOCKERFILE)

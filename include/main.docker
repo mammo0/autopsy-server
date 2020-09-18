@@ -39,8 +39,7 @@ RUN apt-get update && \
         tigervnc-standalone-server \
         matchbox-window-manager \
         tint2 \
-        xfe \
-        xpdf && \
+        xfe && \
     # fix for missing man directories in 'slim' image
     for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done
 
@@ -102,11 +101,10 @@ COPY xstartup $USER_DIR/.vnc/
 # copy predefined config for tint2
 COPY config/tint2rc $USER_DIR/.tint2rc
 
-# setup MIME types for default external viewers
+# setup MIME types xfe file explorer
 RUN xdg-mime default xfe.desktop inode/directory && \
     xdg-mime default xfi.desktop image/* && \
-    xdg-mime default xfw.desktop text/* && \
-    xdg-mime default xpdf.desktop application/pdf
+    xdg-mime default xfw.desktop text/*
 
 EXPOSE 5901/tcp
 VOLUME ["$CONFIG_DIR", "$CASES_DIR", "$IMAGES_DIR"]
