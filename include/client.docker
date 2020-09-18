@@ -2,7 +2,9 @@
 USER root
 RUN apt-get install -y \
         xpdf \
-        libreoffice
+        libreoffice-writer \
+        libreoffice-calc \
+        libreoffice-impress
 
 # setup MIME types for the external viewers
 USER $AUTOPSY_USER
@@ -16,7 +18,7 @@ RUN xdg-mime default xpdf.desktop application/pdf && \
     xdg-mime default libreoffice-calc.desktop application/vnd.ms-excel && \
     xdg-mime default libreoffice-calc.desktop application/vnd.ms-excel && \
     xdg-mime default libreoffice-calc.desktop application/vnd.ms-excel && \
-    xdg-mime default libreoffice-calc.desktop application/vnd.openxmlformats-officedocument.spreadsheetml.sheet && \ 
+    xdg-mime default libreoffice-calc.desktop application/vnd.openxmlformats-officedocument.spreadsheetml.sheet && \
     xdg-mime default libreoffice-calc.desktop application/vnd.openxmlformats-officedocument.spreadsheetml.template && \
     xdg-mime default libreoffice-calc.desktop application/vnd.ms-excel.sheet.macroEnabled.12 && \
     xdg-mime default libreoffice-calc.desktop application/vnd.ms-excel.template.macroEnabled.12 && \
