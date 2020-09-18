@@ -1,8 +1,35 @@
 # install additional viewers for common file types
 USER root
 RUN apt-get install -y \
-        xpdf
+        xpdf \
+        libreoffice
 
 # setup MIME types for the external viewers
 USER $AUTOPSY_USER
-RUN xdg-mime default xpdf.desktop application/pdf
+RUN xdg-mime default xpdf.desktop application/pdf && \
+    xdg-mime default libreoffice-writer.desktop application/msword && \
+    xdg-mime default libreoffice-writer.desktop application/msword && \
+    xdg-mime default libreoffice-writer.desktop application/vnd.openxmlformats-officedocument.wordprocessingml.document && \
+    xdg-mime default libreoffice-writer.desktop application/vnd.openxmlformats-officedocument.wordprocessingml.template && \
+    xdg-mime default libreoffice-writer.desktop application/vnd.ms-word.document.macroEnabled.12 && \
+    xdg-mime default libreoffice-writer.desktop application/vnd.ms-word.template.macroEnabled.12 && \
+    xdg-mime default libreoffice-calc.desktop application/vnd.ms-excel && \
+    xdg-mime default libreoffice-calc.desktop application/vnd.ms-excel && \
+    xdg-mime default libreoffice-calc.desktop application/vnd.ms-excel && \
+    xdg-mime default libreoffice-calc.desktop application/vnd.openxmlformats-officedocument.spreadsheetml.sheet && \ 
+    xdg-mime default libreoffice-calc.desktop application/vnd.openxmlformats-officedocument.spreadsheetml.template && \
+    xdg-mime default libreoffice-calc.desktop application/vnd.ms-excel.sheet.macroEnabled.12 && \
+    xdg-mime default libreoffice-calc.desktop application/vnd.ms-excel.template.macroEnabled.12 && \
+    xdg-mime default libreoffice-calc.desktop application/vnd.ms-excel.addin.macroEnabled.12 && \
+    xdg-mime default libreoffice-calc.desktop application/vnd.ms-excel.sheet.binary.macroEnabled.12 && \
+    xdg-mime default libreoffice-impress.desktop application/vnd.ms-powerpoint && \
+    xdg-mime default libreoffice-impress.desktop application/vnd.ms-powerpoint && \
+    xdg-mime default libreoffice-impress.desktop application/vnd.ms-powerpoint && \
+    xdg-mime default libreoffice-impress.desktop application/vnd.ms-powerpoint && \
+    xdg-mime default libreoffice-impress.desktop application/vnd.openxmlformats-officedocument.presentationml.presentation && \
+    xdg-mime default libreoffice-impress.desktop application/vnd.openxmlformats-officedocument.presentationml.template && \
+    xdg-mime default libreoffice-impress.desktop application/vnd.openxmlformats-officedocument.presentationml.slideshow && \
+    xdg-mime default libreoffice-impress.desktop application/vnd.ms-powerpoint.addin.macroEnabled.12 && \
+    xdg-mime default libreoffice-impress.desktop application/vnd.ms-powerpoint.presentation.macroEnabled.12 && \
+    xdg-mime default libreoffice-impress.desktop application/vnd.ms-powerpoint.template.macroEnabled.12 && \
+    xdg-mime default libreoffice-impress.desktop application/vnd.ms-powerpoint.slideshow.macroEnabled.12
