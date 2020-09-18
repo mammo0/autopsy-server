@@ -75,11 +75,11 @@ RUN [ $(getent group $AUTOPSY_GID) ] || groupadd -f -g $AUTOPSY_GID $AUTOPSY_USE
     useradd -ms /bin/bash -u $AUTOPSY_UID -g $AUTOPSY_GID $AUTOPSY_USER
 
 # enable multi user mode
-COPY config/core.properties $CONFIG_DIR/config/Preferences/org/sleuthkit/autopsy/
+COPY --chown=$AUTOPSY_UID:$AUTOPSY_GID config/core.properties $CONFIG_DIR/config/Preferences/org/sleuthkit/autopsy/
 # use central repository
-COPY config/CentralRepository.properties $CONFIG_DIR/config/
+COPY --chown=$AUTOPSY_UID:$AUTOPSY_GID config/CentralRepository.properties $CONFIG_DIR/config/
 # enable experimental module (needed for auto ingest)
-COPY config/org-sleuthkit-autopsy-experimental.xml $CONFIG_DIR/config/Modules/
+COPY --chown=$AUTOPSY_UID:$AUTOPSY_GID config/org-sleuthkit-autopsy-experimental.xml $CONFIG_DIR/config/Modules/
 
 # create some required directories
 RUN mkdir $USER_DIR/.vnc && \
@@ -97,9 +97,9 @@ WORKDIR $CASES_DIR
 USER $AUTOPSY_USER
 
 # copy the vnc startup script to the container
-COPY xstartup $USER_DIR/.vnc/
+COPY --chown=$AUTOPSY_UID:$AUTOPSY_GID xstartup $USER_DIR/.vnc/
 # copy predefined config for tint2
-COPY config/tint2rc $USER_DIR/.tint2rc
+COPY --chown=$AUTOPSY_UID:$AUTOPSY_GID config/tint2rc $USER_DIR/.tint2rc
 
 # setup MIME types xfe file explorer
 RUN xdg-mime default xfe.desktop inode/directory && \
