@@ -21,6 +21,7 @@ services:
             args:
                 - SOLR_UID=$BUILD_UID
                 - SOLR_GID=$BUILD_GID
+                - AUTOPSY_VERSION=$AUTOPSY_VERSION
         ports:
             - "8983:8983"
             - "9983:9983"
@@ -54,6 +55,8 @@ services:
         build:
             context: .
             args:
+                - AUTOPSY_VERSION=$AUTOPSY_VERSION
+                - SLEUTHKIT_VERSION=$SLEUTHKIT_VERSION
                 - AUTOPSY_UID=$BUILD_UID
                 - AUTOPSY_GID=$BUILD_GID
         ports:

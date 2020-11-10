@@ -20,7 +20,10 @@ server: $(MAIN_TEMPLATE) $(SERVER_TEMPLATE)
 
 image: standalone
 	source $(CURRENT_DIR)/.env && \
-	docker build --rm -t $(TAG) -f $(DOCKERFILE) --build-arg AUTOPSY_UID=$$BUILD_UID --build-arg AUTOPSY_GID=$$BUILD_GID .
+	docker build --rm -t $(TAG) -f $(DOCKERFILE) --build-arg AUTOPSY_VERSION=$$AUTOPSY_VERSION \
+												 --build-arg SLEUTHKIT_VERSION=$$SLEUTHKIT_VERSION \
+ 												 --build-arg AUTOPSY_UID=$$BUILD_UID \
+												 --build-arg AUTOPSY_GID=$$BUILD_GID .
 
 compose: server
 	docker-compose build

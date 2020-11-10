@@ -2,7 +2,7 @@
 FROM openjdk:8-jre
 
 # Some configuration files of the Autopsy package are needed for Solr
-ARG AUTOPSY_VERSION=4.15.0
+ARG AUTOPSY_VERSION
 ARG AUTOPSY_PACKAGE=autopsy-$AUTOPSY_VERSION.zip
 
 # build arguments
