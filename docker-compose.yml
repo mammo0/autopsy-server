@@ -73,11 +73,6 @@ services:
 
 networks:
     autopsy_net:
-        driver: bridge
-        ipam:
-            driver: default
-            config:
-                - subnet: 10.0.1.0/24
 
 
 
