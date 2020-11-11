@@ -10,7 +10,7 @@ ENV VNC_PASSWORD=
 
 # temporary variables (should not be changed manually in build process)
 ARG AUTOPSY_PACKAGE=autopsy-$AUTOPSY_VERSION.zip
-ARG SLEUTHKIT_PACKAGE=sleuthkit-java_$SLEUTHKIT_VERSION-1_amd64.deb
+ARG SLEUTHKIT_DEB_PACKAGE=sleuthkit-java_$SLEUTHKIT_VERSION-1_amd64.deb
 ARG AUTOPSY_USER=autopsy
 ARG AUTOPSY_UID=1000
 ARG AUTOPSY_GID=1000
@@ -50,10 +50,10 @@ RUN wget -q -O - https://download.bell-sw.com/pki/GPG-KEY-bellsoft | apt-key add
     apt-get install -y bellsoft-java8-runtime-full
 
 # install Sleuth Kit
-RUN wget https://github.com/sleuthkit/sleuthkit/releases/download/sleuthkit-$SLEUTHKIT_VERSION/$SLEUTHKIT_PACKAGE && \
-    dpkg -i $SLEUTHKIT_PACKAGE || true && \
+RUN wget https://github.com/sleuthkit/sleuthkit/releases/download/sleuthkit-$SLEUTHKIT_VERSION/$SLEUTHKIT_DEB_PACKAGE && \
+    dpkg -i $SLEUTHKIT_DEB_PACKAGE || true && \
     apt-get install -yqf && \
-    rm $SLEUTHKIT_PACKAGE
+    rm $SLEUTHKIT_DEB_PACKAGE
 
 # install Autopsy
 RUN cd /opt && \
