@@ -5,4 +5,4 @@ matchbox-window-manager -use_titlebar no &
 tint2 -c $HOME/.tint2rc &
 
 # run autopsy
-exec /opt/autopsy/bin/autopsy --userdir $CONFIG_DIR
+exec /opt/autopsy/bin/autopsy --userdir $CONFIG_DIR -J-Djava.io.tmpdir=/tmp/
