@@ -1,3 +1,41 @@
+ARG SLEUTHKIT_VERSION
+
+
+# build Sleuth Kit Java bindings from source to make sure it's builded against Java 8
+FROM debian:sid-slim as tsk-builder
+
+ARG SLEUTHKIT_VERSION
+ARG SLEUTHKIT_SRC_PACKAGE=sleuthkit-$SLEUTHKIT_VERSION.tar.gz
+
+# update image and install dependencies
+RUN for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done && \
+    apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y \
+        build-essential \
+        wget \
+        # dependencies for tsk
+        libafflib-dev \
+        libewf-dev \
+        libpq-dev \
+        autopoint \
+        libsqlite3-dev \
+        ant \
+        libcppunit-dev \
+        openjdk-8-jdk && \
+    update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java && \
+    update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/javac
+
+# build Sleuth Kit
+RUN wget https://github.com/sleuthkit/sleuthkit/releases/download/sleuthkit-$SLEUTHKIT_VERSION/$SLEUTHKIT_SRC_PACKAGE && \
+    tar -xzvf $SLEUTHKIT_SRC_PACKAGE && \
+    cd sleuthkit-$SLEUTHKIT_VERSION && \
+    ./configure && \
+    make -j$(nproc) && \
+    cp bindings/java/dist/sleuthkit-$SLEUTHKIT_VERSION.jar /
+
+
+
 FROM debian:sid-slim
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -54,6 +92,8 @@ RUN wget https://github.com/sleuthkit/sleuthkit/releases/download/sleuthkit-$SLE
     dpkg -i $SLEUTHKIT_DEB_PACKAGE || true && \
     apt-get install -yqf && \
     rm $SLEUTHKIT_DEB_PACKAGE
+# override java bindings
+COPY --from=tsk-builder /sleuthkit-$SLEUTHKIT_VERSION.jar /usr/share/java/
 
 # install Autopsy
 RUN cd /opt && \
