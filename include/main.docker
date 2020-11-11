@@ -111,8 +111,8 @@ RUN apt-get clean
 
 # add a non-root user
 # autopsy and vncserver don't need to be executed as root
-RUN [ $(getent group $AUTOPSY_GID) ] || groupadd -f -g $AUTOPSY_GID $AUTOPSY_USER && \
-    useradd -ms /bin/bash -u $AUTOPSY_UID -g $AUTOPSY_GID $AUTOPSY_USER
+RUN groupadd -o -g $AUTOPSY_GID $AUTOPSY_USER && \
+    useradd -o -m -s /bin/bash -u $AUTOPSY_UID -g $AUTOPSY_GID $AUTOPSY_USER
 
 # enable multi user mode
 COPY --chown=$AUTOPSY_UID:$AUTOPSY_GID config/core.properties $CONFIG_DIR/config/Preferences/org/sleuthkit/autopsy/

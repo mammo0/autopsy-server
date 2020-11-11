@@ -23,8 +23,8 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # add the Solr user
-RUN groupadd -r --gid $SOLR_GID $SOLR_GROUP && \
-  useradd -r --uid $SOLR_UID --gid $SOLR_GID $SOLR_USER
+RUN groupadd -o -r --gid $SOLR_GID $SOLR_GROUP && \
+    useradd -o -r --uid $SOLR_UID --gid $SOLR_GID $SOLR_USER
 
 # install Solr
 RUN mkdir -p /opt/solr && \
