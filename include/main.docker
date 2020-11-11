@@ -141,10 +141,18 @@ COPY --chown=$AUTOPSY_UID:$AUTOPSY_GID xstartup $USER_DIR/.vnc/
 # copy predefined config for tint2
 COPY --chown=$AUTOPSY_UID:$AUTOPSY_GID config/tint2rc $USER_DIR/.tint2rc
 
-# setup MIME types xfe file explorer
+# setup MIME types xfe file explorer and text files
 RUN xdg-mime default xfe.desktop inode/directory && \
-    xdg-mime default xfi.desktop image/* && \
-    xdg-mime default xfw.desktop text/*
+    xdg-mime default xfw.desktop text/calendar && \
+    xdg-mime default xfw.desktop text/comma-separated-values && \
+    xdg-mime default xfw.desktop text/css && \
+    xdg-mime default xfw.desktop text/html && \
+    xdg-mime default xfw.desktop text/javascript && \
+    xdg-mime default xfw.desktop text/plain && \
+    xdg-mime default xfw.desktop text/richtext && \
+    xdg-mime default xfw.desktop text/rtf && \
+    xdg-mime default xfw.desktop text/tab-separated-values && \
+    xdg-mime default xfw.desktop text/xml
 
 EXPOSE 5901/tcp
 VOLUME ["$CONFIG_DIR", "$CASES_DIR", "$IMAGES_DIR"]

@@ -8,7 +8,22 @@ RUN apt-get install -y \
 
 # setup MIME types for the external viewers
 USER $AUTOPSY_USER
-RUN xdg-mime default xpdf.desktop application/pdf && \
+RUN xdg-mime default xfi.desktop image/bmp && \
+    xdg-mime default xfi.desktop image/x-bmp && \
+    xdg-mime default xfi.desktop image/x-ms-bmp && \
+    xdg-mime default xfi.desktop image/cis-cod && \
+    xdg-mime default xfi.desktop image/cmu-raster && \
+    xdg-mime default xfi.desktop image/fif && \
+    xdg-mime default xfi.desktop image/gif && \
+    xdg-mime default xfi.desktop image/ief && \
+    xdg-mime default xfi.desktop image/jpeg && \
+    xdg-mime default xfi.desktop image/png && \
+    xdg-mime default xfi.desktop image/svg+xml && \
+    xdg-mime default xfi.desktop image/tiff && \
+    xdg-mime default xfi.desktop image/vasa && \
+    xdg-mime default xfi.desktop image/x-icon && \
+    xdg-mime default xfi.desktop image/x-rgb && \
+    xdg-mime default xpdf.desktop application/pdf && \
     xdg-mime default libreoffice-writer.desktop application/msword && \
     xdg-mime default libreoffice-writer.desktop application/msword && \
     xdg-mime default libreoffice-writer.desktop application/vnd.openxmlformats-officedocument.wordprocessingml.document && \
